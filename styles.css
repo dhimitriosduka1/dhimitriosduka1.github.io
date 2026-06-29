@@ -193,9 +193,9 @@ strong {
   margin-bottom: 20px;
 }
 
-/* ── News ─────────────────────────────────────── */
+/* ── Timeline ─────────────────────────────────── */
 
-.news-list {
+.timeline-list {
   list-style: none;
   padding: 0 0 0 16px;
   position: relative;
@@ -203,7 +203,7 @@ strong {
   margin-left: 8px;
 }
 
-.news-item {
+.timeline-item {
   position: relative;
   padding: 4px 0 16px 0;
   font-size: 14px;
@@ -211,11 +211,11 @@ strong {
   line-height: 1.55;
 }
 
-.news-item:last-child {
+.timeline-item:last-child {
   padding-bottom: 0;
 }
 
-.news-item::before {
+.timeline-item::before {
   content: '';
   position: absolute;
   left: -23px;
@@ -228,7 +228,7 @@ strong {
   box-shadow: 0 0 0 3px var(--bg-color);
 }
 
-.news-date {
+.timeline-date {
   color: var(--text-light-alt);
   font-size: 13px;
   min-width: 84px;
