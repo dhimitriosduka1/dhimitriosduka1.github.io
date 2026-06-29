@@ -125,6 +125,61 @@
       </article>
     </section>
 
+    <!-- ── Open Source ──────────────────────────── -->
+    <section class="section" id="open-source">
+      <div class="section-header">
+        <h2>Open Source</h2>
+      </div>
+
+      <article class="entry-card">
+        <div class="entry-thumb entry-thumb-icon">
+          <img src="images/scode/main.png" alt="sCode logo" />
+        </div>
+        <div class="entry-body">
+          <a class="entry-title" href="https://github.com/dhimitriosduka1/sCode" target="_blank">
+            sCode
+          </a>
+          <div class="entry-authors">
+            <strong>Dhimitrios Duka</strong>
+          </div>
+          <div class="entry-links">
+            <a href="https://github.com/dhimitriosduka1/sCode" target="_blank">GitHub</a>
+            <span class="entry-links-sep">·</span>
+            <a href="https://marketplace.visualstudio.com/items?itemName=DhimitriosDuka.slurm-cluster-manager" target="_blank">VS Marketplace</a>
+            <span class="entry-links-sep">·</span>
+            <a href="https://open-vsx.org/extension/DhimitriosDuka/slurm-cluster-manager" target="_blank">Open VSX</a>
+          </div>
+          <div class="entry-badges" data-repo="dhimitriosduka1/sCode"
+            data-vsmarketplace="DhimitriosDuka.slurm-cluster-manager" data-openvsx="DhimitriosDuka/slurm-cluster-manager">
+            <span class="repo-badge">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z" />
+              </svg>
+              <span class="repo-badge-count" data-field="stars">···</span>
+            </span>
+            <span class="repo-badge">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+                <path d="M5 5.372v.878c0 .414.336.75.75.75h3.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-.75v1.878a2.25 2.25 0 1 1-1.5 0V8.5h-.75A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0zM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0z" />
+              </svg>
+              <span class="repo-badge-count" data-field="forks">···</span>
+            </span>
+            <span class="repo-badge">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+                <path d="M8.75 1.75a.75.75 0 0 0-1.5 0v6.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75zM2.5 9.75a.75.75 0 0 0-1.5 0v2.5A1.75 1.75 0 0 0 2.75 14h10.5A1.75 1.75 0 0 0 15 12.25v-2.5a.75.75 0 0 0-1.5 0v2.5a.25.25 0 0 1-.25.25H2.75a.25.25 0 0 1-.25-.25v-2.5z" />
+              </svg>
+              <span class="repo-badge-count" data-field="downloads">···</span>
+            </span>
+          </div>
+          <p class="entry-description">
+            A VS Code extension that brings SLURM cluster workflows into the editor: live job monitoring with
+            progress and GPU stats, job array and history management, instant <code>stdout</code>/<code>stderr</code>
+            access, and a GPU partition view for picking where to submit next. Actively maintained and used daily by
+            fellow researchers and others working on SLURM clusters.
+          </p>
+        </div>
+      </article>
+    </section>
+
     <!-- ── Projects ──────────────────────────── -->
     <section class="section" id="projects">
       <div class="section-header">
@@ -206,6 +261,32 @@
     </footer>
 
   </div>
+
+  <script>
+    document.querySelectorAll('.entry-badges[data-repo]').forEach((el) => {
+      fetch(`https://api.github.com/repos/${el.dataset.repo}`)
+        .then((res) => res.json())
+        .then((data) => {
+          el.querySelector('[data-field="stars"]').textContent = data.stargazers_count.toLocaleString();
+          el.querySelector('[data-field="forks"]').textContent = data.forks_count.toLocaleString();
+        })
+        .catch(() => {});
+    });
+
+    document.querySelectorAll('.entry-badges[data-openvsx]').forEach((el) => {
+      const openVsxId = el.dataset.openvsx;
+
+      fetch(`https://open-vsx.org/api/${openVsxId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const downloadsEl = el.querySelector('[data-field="downloads"]');
+          if (downloadsEl) {
+            downloadsEl.textContent = data.downloadCount.toLocaleString();
+          }
+        })
+        .catch(() => {});
+    });
+  </script>
 </body>
 
 </html>
