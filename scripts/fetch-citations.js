@@ -7,9 +7,13 @@
 // writing it was the only source that saw both citations of MM-TS.
 //
 // The trade-off is that Scholar has no API and blocks datacenter IPs with a
-// CAPTCHA, which CI runners frequently hit. Every failure mode here therefore
-// keeps the previous counts rather than writing a wrong (or zero) number: a
-// blocked run leaves the site showing the last good values.
+// CAPTCHA, which CI runners almost always hit. When SERPAPI_KEY is set, the
+// profile is fetched through SerpApi's Google Scholar Author API instead, which
+// returns the same Scholar data without the CAPTCHA; the direct scrape remains
+// as a fallback (and for local runs without a key).
+//
+// Every failure mode here keeps the previous counts rather than writing a wrong
+// (or zero) number: a failed run leaves the site showing the last good values.
 
 const fs = require('fs');
 const path = require('path');
@@ -92,6 +96,42 @@ function parseRows(body) {
   });
 }
 
+// SerpApi returns the profile's articles as JSON. citation_id is
+// "<user>:<scholarId>", and cited_by.value is missing for an uncited paper.
+async function fetchSerpApiRows(apiKey) {
+  const url = new URL('https://serpapi.com/search.json');
+  url.searchParams.set('engine', 'google_scholar_author');
+  url.searchParams.set('author_id', SCHOLAR_USER);
+  url.searchParams.set('hl', 'en');
+  url.searchParams.set('num', '100');
+  url.searchParams.set('api_key', apiKey);
+
+  const res = await fetch(url);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.error) {
+    throw new Error(data.error || `Request failed with status ${res.status}`);
+  }
+
+  return (data.articles || []).map((article) => ({
+    id: article.citation_id ? article.citation_id.split(':').pop() : null,
+    title: article.title || '',
+    citationCount: Number(article.cited_by && article.cited_by.value) || 0,
+  }));
+}
+
+async function fetchRows() {
+  const apiKey = process.env.SERPAPI_KEY;
+  if (apiKey) {
+    try {
+      return await fetchSerpApiRows(apiKey);
+    } catch (err) {
+      console.error('SerpApi request failed:', err.message);
+      console.error('Falling back to scraping Scholar directly.');
+    }
+  }
+  return parseRows(await fetchProfile());
+}
+
 function readExisting() {
   try {
     return JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
@@ -107,7 +147,7 @@ async function main() {
 
   let rows;
   try {
-    rows = parseRows(await fetchProfile());
+    rows = await fetchRows();
   } catch (err) {
     console.error('Failed to fetch Scholar profile:', err.message);
     console.error('Keeping previously fetched counts.');

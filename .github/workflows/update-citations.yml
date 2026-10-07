@@ -20,6 +20,8 @@ jobs:
 
       - name: Fetch citation counts
         run: node scripts/fetch-citations.js
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
 
       - name: Commit changes
         run: |
