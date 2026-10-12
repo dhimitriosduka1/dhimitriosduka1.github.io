@@ -417,11 +417,15 @@ a.repo-badge:hover {
   line-height: 1.65;
 }
 
-.entry-abstract {
+.entry-details {
   margin-top: 8px;
 }
 
-.entry-abstract summary {
+.entry-details + .entry-details {
+  margin-top: 4px;
+}
+
+.entry-details summary {
   width: fit-content;
   font-size: 13px;
   color: var(--accent-color);
@@ -430,14 +434,26 @@ a.repo-badge:hover {
   transition: color 0.15s;
 }
 
-.entry-abstract summary:hover {
+.entry-details summary:hover {
   color: var(--accent-hover);
 }
 
-.entry-abstract p {
+.entry-details p {
   margin-top: 6px;
   font-size: 13.5px;
   line-height: 1.65;
+}
+
+.entry-details pre {
+  margin-top: 6px;
+  padding: 10px 12px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  background: var(--code-bg);
+  border-radius: 4px;
+  overflow-x: auto;
 }
 
 .entry-description code {
