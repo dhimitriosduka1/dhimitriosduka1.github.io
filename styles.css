@@ -509,18 +509,11 @@ footer a:hover {
   .entry-thumb {
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
   }
 
-  .entry-thumb.entry-thumb-icon {
-    aspect-ratio: 16 / 9;
-  }
-
-  .entry-thumb.entry-thumb-figure {
-    aspect-ratio: auto;
-  }
-
-  .entry-thumb.entry-thumb-figure img {
+  .entry-thumb img,
+  .entry-thumb.entry-thumb-icon img {
+    width: 100%;
     height: auto;
   }
 
