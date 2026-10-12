@@ -20,7 +20,7 @@
   --border-light-alt: #bbb;
   
   --card-hover-bg: rgba(37, 99, 168, 0.02);
-  --bg-thumb-icon: #fafafa;
+  --bg-thumb-icon: #fff;
   
   --badge-border: #e2e2e2;
   --badge-accent-border: rgba(37, 99, 168, 0.25);
@@ -508,8 +508,20 @@ footer a:hover {
 
   .entry-thumb {
     width: 100%;
-    max-width: 200px;
-    height: 130px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .entry-thumb.entry-thumb-icon {
+    aspect-ratio: 16 / 9;
+  }
+
+  .entry-thumb.entry-thumb-figure {
+    aspect-ratio: auto;
+  }
+
+  .entry-thumb.entry-thumb-figure img {
+    height: auto;
   }
 
   .timeline-date {
