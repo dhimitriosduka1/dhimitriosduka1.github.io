@@ -444,16 +444,26 @@ a.repo-badge:hover {
   line-height: 1.65;
 }
 
-.entry-details pre {
+.bibtex {
   margin-top: 6px;
   padding: 10px 12px;
   font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
   font-size: 12px;
   line-height: 1.5;
   text-align: left;
+  hyphens: manual;
+  color: var(--text-color);
   background: var(--code-bg);
   border-radius: 4px;
-  overflow-x: auto;
+}
+
+/* One element per BibTeX line: keep the spacing, wrap long lines with a
+   hanging indent so continuations sit under the field they belong to. */
+.bibtex > div {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding-left: 8ch;
+  text-indent: -8ch;
 }
 
 .entry-description code {
