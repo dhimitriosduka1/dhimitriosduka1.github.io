@@ -417,44 +417,36 @@ a.repo-badge:hover {
   line-height: 1.65;
 }
 
-.entry-details {
-  margin-top: 8px;
-}
-
-.entry-details + .entry-details {
-  margin-top: 4px;
-}
-
-.entry-details summary {
-  width: fit-content;
-  font-size: 13px;
+.entry-toggle {
+  padding: 0;
+  font: inherit;
   color: var(--accent-color);
+  background: none;
+  border: 0;
   cursor: pointer;
-  user-select: none;
-  transition: color 0.15s;
 }
 
-.entry-details summary:hover {
-  color: var(--accent-hover);
+.entry-toggle:hover,
+.entry-toggle[aria-expanded="true"] {
+  text-decoration: underline;
 }
 
-.entry-details p {
-  margin-top: 6px;
+.entry-panel {
+  margin-top: 10px;
+  padding: 10px 12px;
   font-size: 13.5px;
   line-height: 1.65;
+  background: var(--code-bg);
+  border-radius: 4px;
 }
 
 .bibtex {
-  margin-top: 6px;
-  padding: 10px 12px;
   font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
   font-size: 12px;
   line-height: 1.5;
   text-align: left;
   hyphens: manual;
   color: var(--text-color);
-  background: var(--code-bg);
-  border-radius: 4px;
 }
 
 /* One element per BibTeX line: keep the spacing, wrap long lines with a
@@ -541,6 +533,16 @@ footer a:hover {
   .entry-thumb.entry-thumb-icon img {
     width: 100%;
     height: auto;
+  }
+
+  .entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+  }
+
+  .entry-links-sep {
+    display: none;
   }
 
   .timeline-date {

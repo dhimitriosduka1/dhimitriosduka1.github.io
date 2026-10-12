@@ -161,6 +161,10 @@
             <a href="https://arxiv.org/abs/2609.07540" target="_blank">arXiv</a>
             <span class="entry-links-sep">·</span>
             <a href="https://arxiv.org/pdf/2609.07540" target="_blank">PDF</a>
+            <span class="entry-links-sep">·</span>
+            <button type="button" class="entry-toggle" aria-expanded="false" aria-controls="temo-abstract">Abstract</button>
+            <span class="entry-links-sep">·</span>
+            <button type="button" class="entry-toggle" aria-expanded="false" aria-controls="temo-bibtex">BibTeX</button>
           </div>
           <div class="entry-badges" data-citations="temo">
             <span class="repo-badge">
@@ -170,8 +174,7 @@
               <span class="repo-badge-count" data-field="citations">···</span>
             </span>
           </div>
-          <details class="entry-details">
-            <summary>Abstract</summary>
+          <div class="entry-panel" id="temo-abstract" hidden>
             <p>
               Contrastive learning approaches achieve strong performance by training models to bring similar samples
               closer while pushing dissimilar samples apart. A crucial component of contrastive learning is the
@@ -186,10 +189,8 @@
               component of TeMo consistently enhances performance across diverse zero-shot retrieval and classification
               tasks, establishing new state-of-the-art results.
             </p>
-          </details>
-          <details class="entry-details">
-            <summary>BibTeX</summary>
-            <div class="bibtex">
+          </div>
+          <div class="entry-panel bibtex" id="temo-bibtex" hidden>
               <div>@article{duka2026temo,</div>
               <div>    author  = {Duka, Dhimitrios and Schiele, Bernt and Kuehne, Hilde and Kukleva, Anna},</div>
               <div>    title   = {TeMo: Temperature Modulation for Multimodal Contrastive Learning},</div>
@@ -197,7 +198,6 @@
               <div>    year    = {2026}</div>
               <div>}</div>
             </div>
-          </details>
         </div>
       </article>
 
@@ -234,6 +234,10 @@
               target="_blank">Supplementary</a>
             <span class="entry-links-sep">·</span>
             <a href="https://arxiv.org/abs/2603.08202" target="_blank">arXiv</a>
+            <span class="entry-links-sep">·</span>
+            <button type="button" class="entry-toggle" aria-expanded="false" aria-controls="mmts-abstract">Abstract</button>
+            <span class="entry-links-sep">·</span>
+            <button type="button" class="entry-toggle" aria-expanded="false" aria-controls="mmts-bibtex">BibTeX</button>
           </div>
           <div class="entry-badges" data-citations="mmts">
             <span class="repo-badge">
@@ -243,8 +247,7 @@
               <span class="repo-badge-count" data-field="citations">···</span>
             </span>
           </div>
-          <details class="entry-details">
-            <summary>Abstract</summary>
+          <div class="entry-panel" id="mmts-abstract" hidden>
             <p>
               Contrastive learning has become a fundamental approach in both uni-modal and multi-modal frameworks. This
               learning paradigm pulls positive pairs of samples closer while pushing negatives apart. In the uni-modal
@@ -262,10 +265,8 @@
               EPIC-KITCHENS-100, and YouCook2, and show that our dynamic temperature and margin schedules improve
               performance and lead to new state-of-the-art results in the field.
             </p>
-          </details>
-          <details class="entry-details">
-            <summary>BibTeX</summary>
-            <div class="bibtex">
+          </div>
+          <div class="entry-panel bibtex" id="mmts-bibtex" hidden>
               <div>@InProceedings{Sheludzko_2026_WACV,</div>
               <div>    author    = {Sheludzko, Siarhei and Duka, Dhimitrios and Schiele, Bernt and Kuehne, Hilde and Kukleva, Anna},</div>
               <div>    title     = {MM-TS: Multi-Modal Temperature and Margin Schedules for Contrastive Learning with Long-Tail Data},</div>
@@ -275,7 +276,6 @@
               <div>    pages     = {7376-7386}</div>
               <div>}</div>
             </div>
-          </details>
         </div>
       </article>
     </section>
@@ -479,6 +479,18 @@
       if (n >= 1e3) return (Math.floor(n / 10) / 100) + 'k';
       return String(n);
     }
+
+    document.querySelectorAll('.entry-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.closest('.entry-body').querySelectorAll('.entry-toggle').forEach((other) => {
+          other.setAttribute('aria-expanded', 'false');
+          document.getElementById(other.getAttribute('aria-controls')).hidden = true;
+        });
+        btn.setAttribute('aria-expanded', String(open));
+        document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+      });
+    });
 
     const citationBadges = document.querySelectorAll('.entry-badges[data-citations]');
     if (citationBadges.length > 0) {
