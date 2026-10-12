@@ -52,6 +52,7 @@ body {
   line-height: 1.7;
   color: var(--text-color);
   background: var(--bg-color);
+  text-align: justify;
 }
 
 /* ── Typography ──────────────────────────────── */
@@ -72,7 +73,6 @@ h2 {
 }
 
 p {
-  text-align: left;
   color: var(--text-muted);
 }
 
@@ -97,7 +97,7 @@ strong {
 /* ── Layout ──────────────────────────────────── */
 
 .container {
-  max-width: 850px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -231,10 +231,10 @@ strong {
 }
 
 .timeline-date {
+  float: left;
   color: var(--text-light-alt);
   font-size: 13px;
   min-width: 84px;
-  display: inline-block;
   font-weight: 500;
 }
 
@@ -451,6 +451,10 @@ footer a:hover {
 /* ── Responsive ───────────────────────────────── */
 
 @media (max-width: 600px) {
+  body {
+    hyphens: auto;
+  }
+
   h1 {
     font-size: 1.6rem;
   }
@@ -486,6 +490,7 @@ footer a:hover {
   }
 
   .timeline-date {
+    float: none;
     display: block;
     margin-bottom: 4px;
   }
