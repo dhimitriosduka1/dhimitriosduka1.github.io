@@ -157,6 +157,23 @@
               <span class="repo-badge-count" data-field="citations">···</span>
             </span>
           </div>
+          <details class="entry-abstract">
+            <summary>Abstract</summary>
+            <p>
+              Contrastive learning approaches achieve strong performance by training models to bring similar samples
+              closer while pushing dissimilar samples apart. A crucial component of contrastive learning is the
+              temperature hyperparameter <em>τ</em>, which controls the penalty strength applied to negative samples.
+              However, most existing methods either fix this hyperparameter or learn a global value during training. In
+              this paper, we introduce TeMo, Temperature Modulation framework, a similarity-based modulation approach
+              that adaptively adjusts the temperature for each positive-negative pair according to their similarity,
+              enabling more fine-grained multimodal contrastive learning. Our approach seamlessly integrates
+              temperature-modulated multimodal and unimodal losses with the standard multimodal contrastive loss by
+              gradually transitioning between them. This design allows the model to capture both coarse- and
+              fine-grained semantics at different training stages. Extensive experiments demonstrate that each
+              component of TeMo consistently enhances performance across diverse zero-shot retrieval and classification
+              tasks, establishing new state-of-the-art results.
+            </p>
+          </details>
         </div>
       </article>
 
@@ -189,6 +206,26 @@
               <span class="repo-badge-count" data-field="citations">···</span>
             </span>
           </div>
+          <details class="entry-abstract">
+            <summary>Abstract</summary>
+            <p>
+              Contrastive learning has become a fundamental approach in both uni-modal and multi-modal frameworks. This
+              learning paradigm pulls positive pairs of samples closer while pushing negatives apart. In the uni-modal
+              setting (e.g., image-based learning), previous research has shown that the strength of these forces can
+              be controlled through the temperature parameter. In this work, we propose Multi-Modal Temperature and
+              Margin Schedules, extending the concept of uni-modal temperature scheduling to multi-modal contrastive
+              learning. Our method dynamically adjusts the temperature in the contrastive loss during training,
+              modulating the attraction and repulsion forces in the multi-modal setting. Additionally, recognizing that
+              standard multi-modal datasets often follow imbalanced, long-tail distributions, we adapt the temperature
+              based on the local distribution of each training sample. Specifically, samples from dense clusters are
+              assigned a higher temperature to better preserve their semantic structure. Furthermore, we demonstrate
+              that temperature scheduling can be effectively integrated within a max-margin framework, thereby unifying
+              the two predominant approaches in multi-modal contrastive learning: InfoNCE loss and max-margin objective.
+              We evaluate our approach on four widely used image- and video-language datasets, Flickr30K, MSCOCO,
+              EPIC-KITCHENS-100, and YouCook2, and show that our dynamic temperature and margin schedules improve
+              performance and lead to new state-of-the-art results in the field.
+            </p>
+          </details>
         </div>
       </article>
     </section>

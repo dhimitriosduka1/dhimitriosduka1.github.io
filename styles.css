@@ -417,6 +417,29 @@ a.repo-badge:hover {
   line-height: 1.65;
 }
 
+.entry-abstract {
+  margin-top: 8px;
+}
+
+.entry-abstract summary {
+  width: fit-content;
+  font-size: 13px;
+  color: var(--accent-color);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+
+.entry-abstract summary:hover {
+  color: var(--accent-hover);
+}
+
+.entry-abstract p {
+  margin-top: 6px;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
 .entry-description code {
   font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
   font-size: 12px;
